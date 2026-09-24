@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="360" viewBox="0 0 1280 360" role="img" aria-labelledby="t d">
+  <title id="t">Imaging Analysis Scripts</title>
+  <desc id="d">Banner for tools that convert and audit Nikon ND2 fluorescence microscopy data</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b1a"/>
+      <stop offset="0.55" stop-color="#0d1530"/>
+      <stop offset="1" stop-color="#1a0c2e"/>
+    </linearGradient>
+    <radialGradient id="dapi" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#6fa8ff" stop-opacity="0.95"/>
+      <stop offset="0.6" stop-color="#2d5bff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#2d5bff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gfp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7dffa0" stop-opacity="0.9"/>
+      <stop offset="0.6" stop-color="#17c45a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#17c45a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rfp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff7a8a" stop-opacity="0.9"/>
+      <stop offset="0.6" stop-color="#e0213d" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e0213d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cy5" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff8cf2" stop-opacity="0.85"/>
+      <stop offset="0.6" stop-color="#c026d3" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#c026d3" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+    <filter id="blur"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+
+  <rect width="1280" height="360" fill="url(#bg)"/>
+  <rect width="1280" height="360" fill="url(#grid)"/>
+
+  <!-- Oocyte field: zona pellucida ring, cytoplasm glow, nucleus -->
+  <g transform="translate(1010 180)">
+    <circle r="150" fill="url(#gfp)" opacity="0.55"/>
+    <circle r="118" fill="none" stroke="#9fb3ff" stroke-opacity="0.35" stroke-width="10"/>
+    <circle r="104" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
+    <circle cx="-22" cy="-14" r="52" fill="url(#dapi)"/>
+    <circle cx="-22" cy="-14" r="30" fill="none" stroke="#bcd3ff" stroke-opacity="0.5" stroke-width="1.5"/>
+    <g fill="url(#rfp)" filter="url(#blur)">
+      <circle cx="-30" cy="-22" r="9"/>
+      <circle cx="-8" cy="-4" r="7"/>
+      <circle cx="-36" cy="0" r="6"/>
+      <circle cx="-14" cy="-30" r="5"/>
+    </g>
+    <circle cx="58" cy="52" r="22" fill="url(#cy5)"/>
+    <circle cx="-70" cy="70" r="14" fill="url(#cy5)" opacity="0.7"/>
+  </g>
+
+  <!-- secondary oocytes -->
+  <g transform="translate(790 70)" opacity="0.55">
+    <circle r="46" fill="url(#rfp)"/>
+    <circle r="36" fill="none" stroke="#ffb3bd" stroke-opacity="0.35" stroke-width="4"/>
+    <circle cx="6" cy="-4" r="14" fill="url(#dapi)"/>
+  </g>
+  <g transform="translate(820 300)" opacity="0.5">
+    <circle r="38" fill="url(#gfp)"/>
+    <circle r="30" fill="none" stroke="#b6ffcb" stroke-opacity="0.35" stroke-width="3"/>
+    <circle cx="-5" cy="3" r="11" fill="url(#dapi)"/>
+  </g>
+
+  <!-- Z-stack -> MaxIP motif -->
+  <g transform="translate(660 180)" fill="none" stroke-width="1.5">
+    <path d="M-40 -40 l40 -16 l40 16 l-40 16 z" stroke="#6fa8ff" stroke-opacity="0.35"/>
+    <path d="M-40 -24 l40 -16 l40 16 l-40 16 z" stroke="#6fa8ff" stroke-opacity="0.5"/>
+    <path d="M-40 -8 l40 -16 l40 16 l-40 16 z" stroke="#6fa8ff" stroke-opacity="0.7"/>
+    <path d="M0 22 v26" stroke="#ffffff" stroke-opacity="0.5"/>
+    <path d="M-6 42 l6 8 l6 -8" stroke="#ffffff" stroke-opacity="0.5"/>
+    <path d="M-40 70 l40 -16 l40 16 l-40 16 z" stroke="#ffffff" stroke-opacity="0.9" fill="#ffffff" fill-opacity="0.06"/>
+  </g>
+
+  <!-- Text -->
+  <g font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif">
+    <text x="72" y="92" fill="#8ea2d8" font-size="16" letter-spacing="4" font-weight="600">CARL · HEBREW UNIVERSITY OF JERUSALEM</text>
+    <text x="70" y="160" fill="#ffffff" font-size="58" font-weight="700">Imaging Analysis</text>
+    <text x="70" y="222" fill="#ffffff" font-size="58" font-weight="300">Scripts</text>
+    <text x="72" y="266" fill="#b8c4e6" font-size="19">Nikon .nd2 → pseudocolored JPEGs · acquisition-metadata audits</text>
+    <g transform="translate(72 296)" font-size="13" font-weight="600">
+      <rect width="62" height="24" rx="12" fill="#2d5bff" fill-opacity="0.25" stroke="#6fa8ff" stroke-opacity="0.6"/>
+      <text x="31" y="16.5" fill="#bcd3ff" text-anchor="middle">DAPI</text>
+      <rect x="72" width="56" height="24" rx="12" fill="#17c45a" fill-opacity="0.2" stroke="#7dffa0" stroke-opacity="0.6"/>
+      <text x="100" y="16.5" fill="#b6ffcb" text-anchor="middle">GFP</text>
+      <rect x="138" width="56" height="24" rx="12" fill="#e0213d" fill-opacity="0.2" stroke="#ff7a8a" stroke-opacity="0.6"/>
+      <text x="166" y="16.5" fill="#ffc2ca" text-anchor="middle">RFP</text>
+      <rect x="204" width="56" height="24" rx="12" fill="#c026d3" fill-opacity="0.2" stroke="#ff8cf2" stroke-opacity="0.6"/>
+      <text x="232" y="16.5" fill="#ffd0f8" text-anchor="middle">Cy5</text>
+      <rect x="270" width="72" height="24" rx="12" fill="#ffffff" fill-opacity="0.08" stroke="#ffffff" stroke-opacity="0.4"/>
+      <text x="306" y="16.5" fill="#e6e9f2" text-anchor="middle">MaxIP</text>
+    </g>
+  </g>
+</svg>
