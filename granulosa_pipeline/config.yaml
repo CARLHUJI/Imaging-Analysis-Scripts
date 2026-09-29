@@ -1,0 +1,64 @@
+# ============================================================================
+# Granulosa image-analysis pipeline — configuration
+# All values documented; override any of them at the CLI via --config other.yaml.
+# ============================================================================
+
+# --- Segmentation --------------------------------------------------------
+# "dapi"       -> Cellpose nuclei model on DAPI only
+# "dapi+gfp"   -> Cellpose cyto model with DAPI as nucleus channel + GFP as cytoplasm
+SEG_CHANNEL: "dapi+gfp"
+
+# ROI used for measurement:
+#   "nuclear"    -> the DAPI/nuclear mask
+#   "whole_cell" -> the cyto mask (requires SEG_CHANNEL=dapi+gfp),
+#                   OR nuclear mask dilated by CYTO_EXPAND_UM (if SEG_CHANNEL=dapi)
+ROI_MODE: "whole_cell"
+
+# Dilation used only when ROI_MODE=whole_cell AND SEG_CHANNEL=dapi.
+CYTO_EXPAND_UM: 2.0
+
+# Channels to measure. Must exist in nd2 metadata (case-insensitive).
+MEASURE_CHANNELS: ["DAPI", "GFP"]
+
+# --- Background ----------------------------------------------------------
+# "shared_patch" -> one patch per image, DAPI-empty AND GFP below speck cutoff,
+#                    sized to the median cell area, reused for every cell.
+# "ring"          -> per-cell annulus (RING_INNER_UM -> RING_OUTER_UM) that
+#                    excludes all detected cells and pixels flagged as GFP specks.
+BACKGROUND_MODE: "shared_patch"
+
+# GFP-speck detection: pixels ABOVE this percentile (computed on the DAPI-empty
+# subset of the image, per channel) are treated as bright non-cell debris and
+# excluded from the background candidate pool.
+SPECK_PERCENTILE: 95.0
+
+# Ring parameters (used only when BACKGROUND_MODE=ring)
+RING_INNER_UM: 1.5
+RING_OUTER_UM: 5.0
+
+# Buffer applied to the cell mask before defining "DAPI-empty" pixels (µm).
+# Guards against picking a patch that just kisses a cell boundary.
+BG_CELL_BUFFER_UM: 2.0
+
+# --- QC filters ----------------------------------------------------------
+MIN_AREA_UM2: 30.0        # discard sub-nuclear debris
+MAX_AREA_UM2: 400.0       # discard fused clumps or artefacts
+MIN_SOLIDITY: 0.85        # convexity ratio; low = fragmented mask
+MAX_ECCENTRICITY: 0.90    # 0=circle, 1=line
+DAPI_INTENSITY_MAX: null  # null = disabled; set (e.g. 4000) to drop hyper-condensed nuclei
+FOCUS_MIN: 20.0           # variance-of-Laplacian on DAPI crop; low = out of focus
+
+# --- Cellpose -----------------------------------------------------------
+CELLPOSE_NUCLEI_MODEL: "nuclei"
+CELLPOSE_CYTO_MODEL: "cyto3"
+CELLPOSE_DIAMETER_UM: null   # null = let Cellpose auto-estimate
+CELLPOSE_FLOW_THRESHOLD: 0.4
+CELLPOSE_CELLPROB_THRESHOLD: 0.0
+CELLPOSE_GPU: false
+CELLPOSE_MIN_SIZE: 15
+
+# --- Reproducibility -----------------------------------------------------
+RANDOM_SEED: 0
+
+# --- Output --------------------------------------------------------------
+OVERLAY_DPI: 150

@@ -1,0 +1,28 @@
+[project]
+name = "granulosa"
+version = "0.1.0"
+description = "Batch image analysis pipeline for isolated granulosa cells (Nikon ND2)."
+requires-python = ">=3.10"
+dependencies = [
+  "numpy",
+  "scipy",
+  "pandas",
+  "scikit-image",
+  "matplotlib",
+  "openpyxl",
+  "pyyaml",
+  "tifffile",
+  "nd2>=0.10",
+  "cellpose>=3.0",
+  "roifile>=2024.5.24",
+]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
